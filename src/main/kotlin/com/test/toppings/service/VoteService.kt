@@ -1,6 +1,6 @@
 package com.test.toppings.service
 
-import com.test.toppings.dto.VoteResultView
+import com.test.toppings.dto.ToppingStatistic
 import com.test.toppings.dto.VoteView
 import com.test.toppings.entity.Topping
 import com.test.toppings.entity.Vote
@@ -18,15 +18,15 @@ class VoteService(
   val toppingRepository: ToppingRepository,
 ) {
 
-  fun getVoteResultByEmail(email: String): VoteResultView {
+  fun getVoteResultByEmail(email: String): VoteView {
     return voteRepository.findVoteByEmail(email)
       .map { it.toVoteView() }
       .orElseThrow { throw ResponseStatusException(HttpStatus.NOT_FOUND) }
   }
 
   //Generally, it is a bad idea to send two request here and might be adjusted to use single query instead of two requests
-  fun getVoteResults(): VoteResultView {
-    return VoteResultView(toppingRepository.findVoteResult(), voteRepository.count())
+  fun getVoteResults(): List<ToppingStatistic> {
+    return toppingRepository.findVoteResult()
   }
 
   fun vote(vote: VoteView) {

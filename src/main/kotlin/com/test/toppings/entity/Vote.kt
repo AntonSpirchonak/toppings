@@ -4,8 +4,13 @@ import javax.persistence.*
 
 @Entity
 data class Vote(
-  @Column(nullable = false)
+  @Column
   val email: String,
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  var id: Long? = 0
+) {
 
   @ManyToMany(cascade = [CascadeType.MERGE, CascadeType.PERSIST])
   @JoinTable(
@@ -13,9 +18,5 @@ data class Vote(
     joinColumns = [JoinColumn(name = "vote_id")],
     inverseJoinColumns = [JoinColumn(name = "topping_id")]
   )
-  var toppings: List<Topping> = listOf(),
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  var id: Long? = 0
-)
+  var toppings: List<Topping> = listOf()
+}
