@@ -19,9 +19,7 @@ class VoteService(
 ) {
 
   fun getVoteResultByEmail(email: String): VoteView {
-    return voteRepository.findVoteByEmail(email)
-      .map { it.toVoteView() }
-      .orElseThrow { throw ResponseStatusException(HttpStatus.NOT_FOUND) }
+    return voteRepository.findVoteByEmail(email)?.toVoteView() ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
   }
 
   //Generally, it is a bad idea to send two request here and might be adjusted to use single query instead of two requests
@@ -35,13 +33,12 @@ class VoteService(
       throw ResponseStatusException(HttpStatus.BAD_REQUEST)
     }
 
-    val voteEntity = voteRepository.findVoteByEmail(vote.email)
-      .orElse(Vote(vote.email))
+    val voteEntity = voteRepository.findVoteByEmail(vote.email) ?: Vote(vote.email)
 
     voteEntity.toppings = vote.toppings
       .map { it.uppercase() }
       .map {
-        toppingRepository.findByName(it).orElse(Topping(it))
+        toppingRepository.findByName(it) ?: Topping(it)
       }
 
     voteRepository.save(voteEntity)

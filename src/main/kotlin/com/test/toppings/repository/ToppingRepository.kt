@@ -4,11 +4,10 @@ import com.test.toppings.dto.ToppingStatistic
 import com.test.toppings.entity.Topping
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.CrudRepository
-import java.util.Optional
 
 interface ToppingRepository : CrudRepository<Topping, Long> {
 
-  fun findByName(name: String): Optional<Topping>
+  fun findByName(name: String): Topping?
 
   @Query(
     """SELECT t.name, count(vd.vote_id) as votes
