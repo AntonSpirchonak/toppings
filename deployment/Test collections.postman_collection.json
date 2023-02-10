@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "71d27e45-92bd-42d3-9033-a3b267fdebea",
+		"name": "Test collections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22740177"
+	},
+	"item": [
+		{
+			"name": "Get all topings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/vote/toppings/result",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"vote",
+						"toppings",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add vote",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"newcustomer@gmail.com\",\r\n    \"toppings\": [\"Meat\", \"Milk\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/vote/toppings/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"vote",
+						"toppings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get my(your) personal choice",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/vote/toppings/result/antonspirchonak@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"vote",
+						"toppings",
+						"result",
+						"antonspirchonak@gmail.com"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
